@@ -93,6 +93,23 @@ class _AuthScreenState extends State<AuthScreen> {
                         ],
                       )),
                 ),
+              ListTile(
+                tileColor: (_auth == Auth.signin)
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundCOlor,
+                title: const Text("Sign in account",
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                leading: Radio(
+                  activeColor: GlobalVariables.secondaryColor,
+                  value: Auth.signin,
+                  groupValue: _auth,
+                  onChanged: (Auth? val) {
+                    setState(() {
+                      _auth = val!;
+                    });
+                  },
+                ),
+              ),
               if (_auth == Auth.signin)
                 Container(
                   padding: const EdgeInsets.all(8),
@@ -120,23 +137,6 @@ class _AuthScreenState extends State<AuthScreen> {
                         ],
                       )),
                 ),
-              ListTile(
-                tileColor: (_auth == Auth.signin)
-                    ? GlobalVariables.backgroundColor
-                    : GlobalVariables.greyBackgroundCOlor,
-                title: const Text("Sign in account",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                leading: Radio(
-                  activeColor: GlobalVariables.secondaryColor,
-                  value: Auth.signin,
-                  groupValue: _auth,
-                  onChanged: (Auth? val) {
-                    setState(() {
-                      _auth = val!;
-                    });
-                  },
-                ),
-              ),
             ],
           ),
         )));
