@@ -1,6 +1,7 @@
 //IMPORTS AND DECLARATIONS
-const DB_CONNECTION_STRING =
-    'mongodb+srv://admin:ZZ1EQqZh68ozAU3z@cluster0.zk4d2xj.mongodb.net/?retryWrites=true&w=majority';
+require('dotenv').config();
+
+const DB_CONNECTION_STRING = process.env.MONGO_DB;
 const PORT = 3000;
 const express = require('express');
 const mongoose = require('mongoose');
