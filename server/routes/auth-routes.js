@@ -2,6 +2,7 @@ const authRouter = require('express').Router();
 const User = require('../models/user_model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 
 //SIGN UP ROUTE
 authRouter.post('/api/signup', async (req, res) => {
@@ -66,5 +67,29 @@ authRouter.post('/api/signin', async (req, res) => {
         res.status(500).json({ error: e.message });
     }
 });
-
+//VALIDATE TOKEN ROUTE
+authRouter.post('/validateToken', async (req, res) => {
+    try {
+        const token = req.header('x-auth-token');
+        if (!token) {
+            return res.status(500).json(false);
+        }
+        const verified = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        if (!verified) {
+            return res.status(500).json(false);
+        }
+        const user = await User.findById(verified.id);
+        if (!user) {
+            res.status(500).json(false);
+        }
+        res.json(true);
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+//GET USER ROUTE
+authRouter.get('/', auth, async (req, res) => {
+    const user = await User.findById(req.user);
+    res.json({ ...user._doc, token: req.token });
+});
 module.exports = authRouter;

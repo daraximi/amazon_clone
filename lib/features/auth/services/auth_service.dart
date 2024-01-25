@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_local_variable
 
 import 'dart:convert';
 
@@ -79,5 +79,40 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
-  //Getting new User
+
+  //Getting User data
+  //Logging in user
+  void getUserData(
+    BuildContext context,
+  ) async {
+    try {
+      //Implement Get User Data
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('x-auth-token');
+      if (token == null) {
+        prefs.setString('x-auth-token', '');
+      }
+      var tokenResponse = await http
+          .post(Uri.parse('$uri/validateToken'), headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': token!,
+      });
+      var response = jsonDecode(tokenResponse.body);
+      if (response) {
+        //get User data
+        var userResponse =
+            await http.get(Uri.parse('$uri/'), headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': token,
+        });
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userResponse.body);
+      } else {
+        prefs.setString('x-auth-token', '');
+        //Go to sign up screen
+      }
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 }
