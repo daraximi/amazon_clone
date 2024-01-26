@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:amazon_clone/common/widgets/bottom_navbar.dart';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
@@ -73,7 +74,7 @@ class AuthService {
                 .setUser(response.body);
             prefs.setString('x-auth-token', jsonDecode(response.body)['token']);
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
+                context, BottomBar.routeName, (route) => false);
           });
     } catch (e) {
       showSnackBar(context, e.toString());
