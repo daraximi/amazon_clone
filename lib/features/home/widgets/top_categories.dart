@@ -14,6 +14,7 @@ class TopCategories extends StatelessWidget {
           itemCount: GlobalVariables.categoryImages.length,
           itemBuilder: (context, index) {
             return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),

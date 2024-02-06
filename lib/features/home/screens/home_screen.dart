@@ -1,6 +1,8 @@
 import 'package:amazon_clone/common/widgets/custom_spacer.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/home/widgets/address_box.dart';
+import 'package:amazon_clone/features/home/widgets/carousel_image.dart';
+import 'package:amazon_clone/features/home/widgets/deal_of_the_day.dart';
 import 'package:amazon_clone/features/home/widgets/top_categories.dart';
 import 'package:flutter/material.dart';
 
@@ -78,8 +80,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: const Column(
-          children: [AddressBox(), CustomSpacer(), TopCategories()],
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: const Column(
+            children: [
+              AddressBox(),
+              CustomSpacer(),
+              TopCategories(),
+              CustomSpacer(),
+              CarouselImage(),
+              CustomSpacer(),
+              DealOfTheDay()
+            ],
+          ),
         ));
   }
 }
