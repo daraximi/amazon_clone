@@ -1,4 +1,4 @@
-import 'package:amazon_clone/features/admin/screens/add_product_scree.dart';
+import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
 import 'package:flutter/material.dart';
 
 class PostsScreen extends StatefulWidget {

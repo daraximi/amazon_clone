@@ -1,5 +1,5 @@
 import 'package:amazon_clone/common/widgets/bottom_navbar.dart';
-import 'package:amazon_clone/features/admin/screens/add_product_scree.dart';
+import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
