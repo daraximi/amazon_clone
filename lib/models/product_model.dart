@@ -9,7 +9,7 @@ class Product {
   final String category;
   final double price;
   final String? id;
-  final String? userId;
+
   Product({
     required this.name,
     required this.description,
@@ -18,7 +18,6 @@ class Product {
     required this.category,
     required this.price,
     this.id,
-    this.userId,
   });
 
   // rating
@@ -32,7 +31,6 @@ class Product {
       'category': category,
       'price': price,
       'id': id,
-      'userId': userId,
     };
   }
 
@@ -45,7 +43,6 @@ class Product {
       category: map['category'] as String,
       price: map['price'] as double,
       id: map['_id'] != null ? map['id'] as String : null,
-      userId: map['userId'] != null ? map['userId'] as String : null,
     );
   }
 

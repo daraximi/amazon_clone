@@ -5,6 +5,7 @@ import 'package:amazon_clone/common/widgets/custom_spacer.dart';
 import 'package:amazon_clone/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/admin/services/admin_services.dart';
 import 'package:amazon_clone/features/home/widgets/carousel_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -23,9 +24,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
+  final AdminServices adminService = AdminServices();
 
   String category = 'Mobiles';
   List<File> images = [];
+  final _addProductFormKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -51,6 +54,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
     });
   }
 
+  void addProduct() {
+    if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
+      adminService.sellProduct(
+          context: context,
+          name: productNameController.text,
+          description: descriptionController.text,
+          price: double.parse(priceController.text),
+          quantity: double.parse(quantityController.text),
+          category: category,
+          images: images);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +84,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _addProductFormKey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -147,7 +164,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                 ),
                 CustomSpacer(),
-                CustomButton(buttonText: 'Sell', onPressed: () {})
+                CustomButton(buttonText: 'Sell', onPressed: addProduct)
               ],
             ),
           ),
