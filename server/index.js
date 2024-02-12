@@ -7,12 +7,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 //IMPORTS FROM OTHER FILES
 const authRouter = require('./routes/auth-routes');
+const adminRouter = require('./routes/admin-routes');
 //INITS
 const app = express();
 
 //MIDDLEWARE
 app.use(express.json());
-app.use(authRouter, require('./routes/auth-routes'));
+app.use(authRouter);
+app.use(adminRouter);
 
 //DATABASE CONNECTION
 mongoose
