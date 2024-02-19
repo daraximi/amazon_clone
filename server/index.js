@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 //IMPORTS FROM OTHER FILES
 const authRouter = require('./routes/auth-routes');
 const adminRouter = require('./routes/admin-routes');
+const productRouter = require('./routes/product-routes');
 //INITS
 const app = express();
 
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
 
 //DATABASE CONNECTION
 mongoose
