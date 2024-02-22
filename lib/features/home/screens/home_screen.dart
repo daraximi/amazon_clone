@@ -4,6 +4,7 @@ import 'package:amazon_clone/features/home/widgets/address_box.dart';
 import 'package:amazon_clone/features/home/widgets/carousel_image.dart';
 import 'package:amazon_clone/features/home/widgets/deal_of_the_day.dart';
 import 'package:amazon_clone/features/home/widgets/top_categories.dart';
+import 'package:amazon_clone/features/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,6 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
     //final user = Provider.of<UserProvider>(context).user;
@@ -37,32 +42,35 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(7),
                       elevation: 1,
                       child: TextFormField(
+                          onFieldSubmitted: navigateToSearchScreen,
                           decoration: InputDecoration(
-                        hintText: "Search Amazon.UK",
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 15),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.only(top: 10),
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(7)),
-                            borderSide: BorderSide.none),
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(7)),
-                            borderSide:
-                                BorderSide(color: Colors.black38, width: 1)),
-                        prefixIcon: InkWell(
-                          onTap: () {},
-                          child: const Padding(
-                            padding: EdgeInsets.only(left: 6),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.black,
-                              size: 23,
+                            hintText: "Search Amazon.UK",
+                            hintStyle: const TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 15),
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: const EdgeInsets.only(top: 10),
+                            border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(7)),
+                                borderSide: BorderSide.none),
+                            enabledBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(7)),
+                                borderSide: BorderSide(
+                                    color: Colors.black38, width: 1)),
+                            prefixIcon: InkWell(
+                              onTap: () {},
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 6),
+                                child: Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                  size: 23,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      )),
+                          )),
                     ),
                   ),
                 ),
