@@ -79,22 +79,22 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                               SizedBox(
                                 height: 130,
                                 child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black12, width: 0.5)),
                                   child: Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     child: Image.network(
                                       product.images[0],
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.black12, width: 0.5)),
                                 ),
                               ),
                               Container(
                                 alignment: Alignment.topLeft,
-                                padding:
-                                    EdgeInsets.only(left: 0, top: 5, right: 15),
+                                padding: const EdgeInsets.only(
+                                    left: 0, top: 5, right: 15),
                                 child: Text(
                                   product.name,
                                   maxLines: 1,

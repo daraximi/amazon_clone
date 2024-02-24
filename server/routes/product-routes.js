@@ -33,7 +33,7 @@ productRouter.get(
 productRouter.post('/api/rate-product', auth, async (req, res) => {
     try {
         const { id, rating } = req.body;
-        const product = await Product.findById(id);
+        var product = await Product.findById(id);
         for (let i = 0; i < product.ratings.length; i++) {
             if (product.ratings[i].userId === req.user) {
                 product.ratings.splice(i, 1);

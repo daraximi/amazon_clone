@@ -24,7 +24,12 @@ class ProductDetailsServices {
             'x-auth-token': userProvider.user.token,
           },
           body: jsonEncode({'id': product.id, 'rating': rating}));
-      httpErrorHandle(response: response, context: context, onSuccess: () {});
+      httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            debugPrint("Product rated successfully!");
+          });
     } catch (e) {
       showSnackBar(context, e.toString());
     }

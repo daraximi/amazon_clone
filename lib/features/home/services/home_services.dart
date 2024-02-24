@@ -39,6 +39,7 @@ class HomeServices {
         },
       );
     } catch (e) {
+      print(e);
       showSnackBar(context, e.toString());
     }
     return productList;
