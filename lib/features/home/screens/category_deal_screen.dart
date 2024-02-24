@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/home/services/home_services.dart';
+import 'package:amazon_clone/features/product_details/screens/product_detail_screen.dart';
 import 'package:amazon_clone/models/product_model.dart';
 import 'package:flutter/material.dart';
 
@@ -69,34 +70,39 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                               mainAxisSpacing: 10),
                       itemBuilder: (context, index) {
                         final product = productList![index];
-                        return Column(
-                          children: [
-                            SizedBox(
-                              height: 130,
-                              child: DecoratedBox(
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Image.network(
-                                    product.images[0],
-                                    fit: BoxFit.cover,
+                        return GestureDetector(
+                          onTap: () => Navigator.pushNamed(
+                              context, ProductDetailsScreen.routeName,
+                              arguments: product),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 130,
+                                child: DecoratedBox(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Image.network(
+                                      product.images[0],
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black12, width: 0.5)),
                                 ),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.black12, width: 0.5)),
                               ),
-                            ),
-                            Container(
-                              alignment: Alignment.topLeft,
-                              padding:
-                                  EdgeInsets.only(left: 0, top: 5, right: 15),
-                              child: Text(
-                                product.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )
-                          ],
+                              Container(
+                                alignment: Alignment.topLeft,
+                                padding:
+                                    EdgeInsets.only(left: 0, top: 5, right: 15),
+                                child: Text(
+                                  product.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              )
+                            ],
+                          ),
                         );
                       }),
                 )
