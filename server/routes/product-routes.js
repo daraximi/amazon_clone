@@ -19,7 +19,6 @@ productRouter.get(
     auth,
     async (req, res) => {
         try {
-            console.log(req.params.searchQuery);
             const products = await Product.find({
                 name: { $regex: req.params.searchQuery, $options: 'i' },
             });
@@ -29,5 +28,28 @@ productRouter.get(
         }
     }
 );
+
+//Create a post request to rate the product.
+productRouter.post('/api/rate-product', auth, async (req, res) => {
+    try {
+        const { id, rating } = req.body;
+        const product = await Product.findById(id);
+        for (let i = 0; i < product.ratings.length; i++) {
+            if (product.ratings[i].userId === req.user) {
+                product.ratings.splice(i, 1);
+                break;
+            }
+        }
+        const ratingSchema = {
+            userId: req.user,
+            rating: rating,
+        };
+        product.ratings.push(ratingSchema);
+        product = await product.save();
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 module.exports = productRouter;
