@@ -1,4 +1,5 @@
 import 'package:amazon_clone/common/widgets/stars.dart';
+import 'package:amazon_clone/features/cart/services/cart_services.dart';
 import 'package:amazon_clone/features/product_details/services/product_details_services.dart';
 import 'package:amazon_clone/models/product_model.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
@@ -17,8 +18,13 @@ class CartProduct extends StatefulWidget {
 class _CartProductState extends State<CartProduct> {
   final ProductDetailsServices productDetailsServices =
       ProductDetailsServices();
+  final CartServices cartServices = CartServices();
   void increaseQuantity(Product product) {
     productDetailsServices.addToCart(context: context, product: product);
+  }
+
+  void reduceQuantity(Product product) {
+    cartServices.removeFromCart(context: context, product: product);
   }
 
   @override
@@ -76,7 +82,7 @@ class _CartProductState extends State<CartProduct> {
                     width: 235,
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      '\$${product.price}',
+                      '£${product.price}',
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                       maxLines: 2,
@@ -108,11 +114,14 @@ class _CartProductState extends State<CartProduct> {
                     border: Border.all(color: Colors.black12, width: 1.5)),
                 child: Row(
                   children: [
-                    Container(
-                      width: 35,
-                      height: 32,
-                      alignment: Alignment.center,
-                      child: const Icon(Icons.remove),
+                    InkWell(
+                      onTap: () => reduceQuantity(product),
+                      child: Container(
+                        width: 35,
+                        height: 32,
+                        alignment: Alignment.center,
+                        child: const Icon(Icons.remove),
+                      ),
                     ),
                     DecoratedBox(
                       decoration: BoxDecoration(
