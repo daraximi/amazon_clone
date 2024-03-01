@@ -55,12 +55,11 @@ class HomeServices {
         category: '',
         price: 0);
     try {
-      http.Response response = await http.get(
-          Uri.parse('$uri/api/deal-of-the-dayy'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'x-auth-token': userProvider.user.token,
-          });
+      http.Response response = await http
+          .get(Uri.parse('$uri/api/deal-of-the-day'), headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
       debugPrint(response.body);
       // ignore: use_build_context_synchronously
       httpErrorHandle(

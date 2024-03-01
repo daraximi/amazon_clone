@@ -43,6 +43,7 @@ class ProductDetailsServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       //POST TO SERVER
+
       var response = await http.post(Uri.parse('$uri/api/add-to-cart'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
