@@ -44,6 +44,7 @@ dependencies:
     file_picker: ^6.1.1
     cloudinary_public: ^0.23.1
     flutter_rating_bar: ^4.0.1
+    pay: ^2.0.0
 
 dev_dependencies:
     flutter_test:
@@ -70,7 +71,8 @@ flutter:
     assets:
         - lib/.env
         - assets/images/
-        - assets/
+        - assets/applepay.json
+        - assets/gpay.json
     #   - images/a_dot_burr.jpeg
     #   - images/a_dot_ham.jpeg
 
