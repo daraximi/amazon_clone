@@ -3,6 +3,7 @@ const userRouter = express.Router();
 const auth = require('../middleware/auth');
 const { Product } = require('../models/product_model');
 const User = require('../models/user_model');
+const Order = require('../models/order_model');
 userRouter.post('/api/add-to-cart', auth, async (req, res) => {
     try {
         const { id } = req.body;
@@ -106,7 +107,7 @@ userRouter.post('/api/order', auth, async (req, res) => {
         res.status(500).json({ error: e.message });
     }
 });
-
+// get user orders
 userRouter.get('/api/orders/me', auth, async (req, res) => {
     try {
         const orders = await Order.find({ userId: req.user });
